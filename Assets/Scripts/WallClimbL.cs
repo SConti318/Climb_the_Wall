@@ -26,6 +26,8 @@ public class WallClimbL : MonoBehaviour
         UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Left, leftList);
         leftHand = leftList[0];
 
+        firstLeft = false;
+        isCurrent = false;
     }
 
     // Update is called once per frame
@@ -37,9 +39,9 @@ public class WallClimbL : MonoBehaviour
             UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Left, leftList);
             leftHand = leftList[0];
             Debug.Log("Left set to valid");
-            firstLeft = false;
-            isCurrent = false;
+
         }
+
     }
 
     private void OnTriggerStay(Collider hit)
