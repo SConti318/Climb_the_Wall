@@ -24,10 +24,13 @@ public class WallClimb : MonoBehaviour
 
     [SerializeField] private GameObject leftCon;
     [SerializeField] private GameObject rightCon;
+    [SerializeField] private GameObject leftToolSphere;
+    [SerializeField] private GameObject rightToolSphere;
 
     private bool firstLeft;
     private bool firstRight;
     private hand curHand;
+    private bool toolUsed;
 
     private Vector3 originalHand;
     // Start is called before the first frame update
@@ -45,6 +48,7 @@ public class WallClimb : MonoBehaviour
         rightHold = false;
         firstLeft = false;
         firstRight = false;
+        toolUsed = false;
     }
 
     // Update is called once per frame
@@ -68,125 +72,72 @@ public class WallClimb : MonoBehaviour
         //Debug.Log("hand " + transform.localPosition.ToString());
     }
 
-    /*void FixedUpdate()
-    {
-        bool gripValue;
-        if (leftHold)
-        {
-            if (leftHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out gripValue) && gripValue)
-            {
-                Debug.Log("Grip button is pressed in hand hold");
-                //wall.transform.SetParent(grabbyL.transform);
-
-                cameraOff.transform.position += -1 * (transform.localPosition - originalHand);
-                Debug.Log((transform.localPosition - originalHand).ToString());
-                //Debug.Log(camera.transform.position.ToString());
-                //originalHand = transform.localPosition;
-            }
-        }
-    }*/
 
     private void OnTriggerStay(Collider hit)
     {
 
-        if (hit.gameObject.tag == "handHold")
-        {
-            Debug.Log("colliding with hand hold");
             bool gripValue;
             if (leftHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out gripValue) && gripValue)
             {
-
-                if (!firstLeft)
+                if (hit.gameObject.tag == "handHold")
                 {
+
+                    if (!firstLeft)
+                    {
                     originalHand = leftCon.transform.position;
                     firstLeft = true;
                     curHand = hand.Left;
-                }
+                    }
 
-                if (curHand == hand.Left) {
+                    if (curHand == hand.Left) 
+                    {
                     Debug.Log("Grip button is pressed in hand hold");
                     //wall.transform.SetParent(grabbyL.transform);
                     cameraOff.transform.position += -1 * (leftCon.transform.position - originalHand);
                     Debug.Log("new " + leftCon.transform.position.ToString());
                     //Debug.Log(camera.transform.position.ToString());
                     //originalHand = transform.localPosition;
+                    leftToolSphere.SetActive(false);
+                    }
+
                 }
             }
             else
             {
                 firstLeft = false;
+                leftToolSphere.SetActive(true);
             }
         
             if (rightHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out gripValue) && gripValue)
             {
-                if (!firstRight) 
+                if (hit.gameObject.tag == "handHold")
                 {
-                    originalHand = rightCon.transform.position;
-                    firstRight = true;
-                    curHand = hand.Right;
-                }
+                    if (!firstRight)
+                    {
+                        originalHand = rightCon.transform.position;
+                        firstRight = true;
+                        curHand = hand.Right;
+                    }
 
-                if (curHand == hand.Right)
-                {
-                    Debug.Log("Grip button is pressed in hand hold");
-                    //wall.transform.SetParent(grabbyL.transform);
-                    cameraOff.transform.position += -1 * (rightCon.transform.position - originalHand);
-                    Debug.Log("new " + leftCon.transform.position.ToString());
-                    //Debug.Log(camera.transform.position.ToString());
-                    //originalHand = transform.localPosition;
+                    if (curHand == hand.Right)
+                    {
+                        Debug.Log("Grip button is pressed in hand hold");
+                        //wall.transform.SetParent(grabbyL.transform);
+                        cameraOff.transform.position += -1 * (rightCon.transform.position - originalHand);
+                        Debug.Log("new " + leftCon.transform.position.ToString());
+                        //Debug.Log(camera.transform.position.ToString());
+                        //originalHand = transform.localPosition;
+                        rightToolSphere.SetActive(false);
+                    }
                 }
             }
             else
             {
                 firstRight = false;
+                rightToolSphere.SetActive(true);
             }
-            /*
-            if (leftHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out gripValue) && gripValue)
-            {
-                Debug.Log("Grip button is pressed in hand hold");
-                wall.transform.SetParent(grabbyL.transform);
-                leftHold = true;
-            }
-            else
-            {
-                //Debug.Log("No parent");
-                //wall.transform.SetParent(null);
-            }
-            */
+        
 
-            /*wall.transform.rotation = Quaternion.Euler(270.0f, 0.0f, 0.0f);
-            if (!(leftHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out gripValue) && gripValue))
-            {
-                Debug.Log("Grip release");
-                leftHold = false;
-            }*/
-
-
-            /*
-            if (!rightHold)
-            {
-                if (rightHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out gripValue) && gripValue)
-                {
-                    Debug.Log("Grip button is pressed in hand hold");
-                    wall.transform.SetParent(grabbyR.transform);
-                    rightHold = true;
-                }
-                else
-                {
-                    Debug.Log("No parent");
-                    wall.transform.SetParent(null);
-                }
-            }
-            else {
-                wall.transform.rotation = Quaternion.Euler(270.0f, 0.0f, 0.0f);
-                if (!(rightHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out gripValue) && gripValue))
-                {
-                    Debug.Log("Grip release");
-                    rightHold = false;
-                }
-            }
-            */
-        }
 
     }
 }
