@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.UI;
 
 public class WallClimbL : MonoBehaviour
 {
 
     public GameObject grabbyL;
     InputDevice leftHand;
+
+    [SerializeField] private MenuLogic menu;
+
     [SerializeField] private GameObject cameraOff;
     [SerializeField] private GameObject leftCon;
     [SerializeField] private GameObject leftToolSphere;
@@ -66,6 +70,7 @@ public class WallClimbL : MonoBehaviour
                     Debug.Log("Grip button is pressed in hand hold");
                     //wall.transform.SetParent(grabbyL.transform);
                     cameraOff.transform.position += -1 * (leftCon.transform.position - originalHand);
+                    cameraOff.GetComponent<Rigidbody>().isKinematic = true;
                     Debug.Log("new " + leftCon.transform.position.ToString());
                     //Debug.Log(camera.transform.position.ToString());
                     //originalHand = transform.localPosition;
@@ -77,10 +82,34 @@ public class WallClimbL : MonoBehaviour
                 firstLeft = false;
                 leftToolSphere.SetActive(true);
                 isCurrent = false;
+                cameraOff.GetComponent<Rigidbody>().isKinematic = false;
             }
         }
+        bool triggerValue;
+        if (hit.gameObject.tag == "UIButton")
+        {
+            if (leftHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out triggerValue) && triggerValue)
+            {
+                hit.gameObject.GetComponent<Button>().onClick.Invoke();
+            }
+        }
+        /*
+        if (hit.gameObject.tag == "Backpack")
+        {
+            Debug.Log("Backpack Hit");
+            if (leftHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out triggerValue) && triggerValue)
+            {
+                menu.ToggleMenu();
+            }
+        }*/
     }
-
+    private void OnTriggerEnter(Collider hit)
+    {
+        if (hit.gameObject.tag == "Backpack")
+        {
+            menu.ToggleMenu();
+        }
+    }
     public void setCurrent(bool cur)
     {
         isCurrent = cur;
