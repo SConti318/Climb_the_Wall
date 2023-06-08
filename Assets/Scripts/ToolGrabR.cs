@@ -51,6 +51,7 @@ public class ToolGrabR : MonoBehaviour
                 }
                 //Debug.Log("grab tool");
                 hit.transform.parent = rightCon.transform;
+                hit.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 //toolUsed = true;
                 rightClimbSphere.SetActive(false);
                 toolUsedR = true;
@@ -61,8 +62,10 @@ public class ToolGrabR : MonoBehaviour
                 if (hit.transform.parent == rightCon.transform)
                 {
                     hit.transform.parent = null;
+                    hit.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 }
                 toolUsedR = false;
+                
                 rightClimbSphere.SetActive(true);
 
             }

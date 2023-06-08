@@ -19,6 +19,7 @@ public class WallClimbL : MonoBehaviour
 
     private bool isCurrent;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class WallClimbL : MonoBehaviour
 
         firstLeft = false;
         isCurrent = false;
+
     }
 
     // Update is called once per frame
@@ -44,10 +46,13 @@ public class WallClimbL : MonoBehaviour
 
     }
 
+
+
     private void OnTriggerStay(Collider hit)
     {
         if (hit.gameObject.tag == "handHold")
         {
+
             Debug.Log("colliding with hand hold");
             bool gripValue;
             if (leftHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out gripValue) && gripValue)
@@ -61,6 +66,8 @@ public class WallClimbL : MonoBehaviour
                     rightClimb.GetComponent<WallClimbR>().setCurrent(false);
                 }
 
+                
+
                 if (isCurrent)
                 {
                     Debug.Log("Grip button is pressed in hand hold");
@@ -70,19 +77,68 @@ public class WallClimbL : MonoBehaviour
                     //Debug.Log(camera.transform.position.ToString());
                     //originalHand = transform.localPosition;
                     leftToolSphere.SetActive(false);
+                    cameraOff.GetComponent<Rigidbody>().isKinematic = true;
                 }
             }
             else
             {
+                Debug.Log("no hand hold");
                 firstLeft = false;
                 leftToolSphere.SetActive(true);
                 isCurrent = false;
+
+                if (rightClimb.GetComponent<WallClimbR>().isActive())
+                {
+                    rightClimb.GetComponent<WallClimbR>().setCurrent(true);
+                }
+
+                else if (rightClimb.GetComponent<WallClimbR>().shouldFall())
+                {
+                    cameraOff.GetComponent<Rigidbody>().isKinematic = false;
+                }
             }
         }
     }
 
+    
+    public void OnTriggerExit(Collider hit)
+    {
+     
+
+        if (hit.gameObject.tag == "handHold")
+        {
+            
+            Debug.Log("exit");
+            firstLeft = false;
+            isCurrent = false;
+            leftToolSphere.SetActive(true);
+
+            if (rightClimb.GetComponent<WallClimbR>().isActive())
+            {
+                Debug.Log("called active");
+                rightClimb.GetComponent<WallClimbR>().setCurrent(true);
+            }
+            else if (rightClimb.GetComponent<WallClimbR>().shouldFall())
+            {
+                Debug.Log("falling");
+
+                cameraOff.GetComponent<Rigidbody>().isKinematic = false;
+            }
+        }
+    } 
+
     public void setCurrent(bool cur)
     {
         isCurrent = cur;
+    }
+
+    public bool shouldFall()
+    {
+        return !(isCurrent);
+    }
+
+    public bool isActive()
+    {
+        return firstLeft;
     }
 }

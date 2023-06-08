@@ -70,6 +70,7 @@ public class WallClimbR : MonoBehaviour
                     //Debug.Log(camera.transform.position.ToString());
                     //originalHand = transform.localPosition;
                     rightToolSphere.SetActive(false);
+                    cameraOff.GetComponent<Rigidbody>().isKinematic = true;
                 }
             }
             else
@@ -77,12 +78,52 @@ public class WallClimbR : MonoBehaviour
                 firstRight = false;
                 rightToolSphere.SetActive(true);
                 isCurrent = false;
+
+                if (leftClimb.GetComponent<WallClimbL>().isActive())
+                {
+                    leftClimb.GetComponent<WallClimbL>().setCurrent(true);
+                }
+                else if (leftClimb.GetComponent<WallClimbL>().shouldFall())
+                {
+                    cameraOff.GetComponent<Rigidbody>().isKinematic = false;
+                }
             }
         }
+    }
+
+    public void OnTriggerExit(Collider hit)
+    {
+
+        if (hit.gameObject.tag == "handHold")
+        {
+            firstRight = false;
+            isCurrent = false;
+            rightToolSphere.SetActive(true);
+
+            if (leftClimb.GetComponent<WallClimbL>().isActive())
+            {
+                leftClimb.GetComponent<WallClimbL>().setCurrent(true);
+            }
+            else if (leftClimb.GetComponent<WallClimbL>().shouldFall())
+            {
+                cameraOff.GetComponent<Rigidbody>().isKinematic = false;
+            }
+        }
+        
     }
 
     public void setCurrent(bool cur)
     {
         isCurrent = cur;
+    }
+
+    public bool shouldFall()
+    {
+        return !(isCurrent);
+    }
+
+    public bool isActive()
+    {
+        return firstRight;
     }
 }

@@ -55,6 +55,7 @@ public class ToolGrabL : MonoBehaviour
                 }
                 Debug.Log("grab tool left");
                 hit.transform.parent = leftCon.transform;
+                hit.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 //toolUsed = true;
                 leftClimbSphere.SetActive(false);
                 toolUsedL = true;
@@ -70,6 +71,7 @@ public class ToolGrabL : MonoBehaviour
 
 
                 toolUsedL = false;
+                hit.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 leftClimbSphere.SetActive(true);
 
             }
