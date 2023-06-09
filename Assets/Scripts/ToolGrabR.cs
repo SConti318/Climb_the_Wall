@@ -8,6 +8,8 @@ public class ToolGrabR : MonoBehaviour
 
     InputDevice rightHand;
 
+    [SerializeField] private HandManager handManager;
+
     [SerializeField] private GameObject rightCon;
 
     [SerializeField] private GameObject rightClimbSphere;
@@ -17,23 +19,14 @@ public class ToolGrabR : MonoBehaviour
     void Start()
     {
 
-        var rightList = new List<UnityEngine.XR.InputDevice>();
-        UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Right, rightList);
-        rightHand = rightList[0];
-
+        rightHand = handManager.rightHand;
         toolUsedR = false;   
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (!rightHand.isValid)
-        {
-            var rightList = new List<UnityEngine.XR.InputDevice>();
-            UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Right, rightList);
-            rightHand = rightList[0];
-        }
+        rightHand = handManager.rightHand;
     }
 
     private void OnTriggerStay(Collider hit)

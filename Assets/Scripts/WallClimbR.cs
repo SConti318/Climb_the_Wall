@@ -10,6 +10,8 @@ public class WallClimbR : MonoBehaviour
     InputDevice rightHand;
     public GameObject grabbyR;
 
+    [SerializeField] private HandManager handManager;
+
     [SerializeField] private MenuLogic menu;
 
     [SerializeField] private GameObject cameraOff;
@@ -27,9 +29,7 @@ public class WallClimbR : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var rightList = new List<UnityEngine.XR.InputDevice>();
-        UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Right, rightList);
-        rightHand = rightList[0];
+        rightHand = handManager.rightHand;
 
         firstRight = false;
         isCurrent = false;
@@ -38,12 +38,7 @@ public class WallClimbR : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!rightHand.isValid)
-        {
-            var rightList = new List<UnityEngine.XR.InputDevice>();
-            UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Right, rightList);
-            rightHand = rightList[0];
-        }
+        rightHand = handManager.rightHand;
     }
 
     private void OnTriggerStay(Collider hit)

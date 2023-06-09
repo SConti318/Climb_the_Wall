@@ -10,47 +10,83 @@ public class MenuLogic : MonoBehaviour
     InputDevice rightHand;
     private bool MenuVis;
     [SerializeField] private GameObject menu;
+    [SerializeField] private Compass compass;
+    [SerializeField] private HandManager handManager;
+
+    [SerializeField] private List<GameObject> menuItems;
+
+    private Image selected;
+    private int currCheckpoint;
     // Start is called before the first frame update
     void Start()
     {
-        var leftList = new List<UnityEngine.XR.InputDevice>();
-        UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Left, leftList);
-        leftHand = leftList[0];
-
-        var rightList = new List<UnityEngine.XR.InputDevice>();
-        UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Right, rightList);
-        rightHand = rightList[0];
+        leftHand = handManager.leftHand;
+        rightHand = handManager.rightHand;
 
         MenuVis = false;
         //menu.enabled = false;
         menu.SetActive(false);
-
+        selected = menuItems[0].GetComponent<Image>();
+        currCheckpoint = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (!leftHand.isValid)
-        {
-            var leftList = new List<UnityEngine.XR.InputDevice>();
-            UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Left, leftList);
-            leftHand = leftList[0];
-            Debug.Log("Left set to valid");
 
-        }
-
-        if (!rightHand.isValid)
-        {
-            var rightList = new List<UnityEngine.XR.InputDevice>();
-            UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Right, rightList);
-            rightHand = rightList[0];
-        }
+        leftHand = handManager.leftHand;
+        rightHand = handManager.rightHand;
     }
 
     public void ToggleMenu() {
         Debug.Log("Menu Toggled");
         MenuVis = !MenuVis;
         menu.SetActive(MenuVis);
+    }
+
+    public void CP1Select() 
+    {
+        currCheckpoint = 0;
+        selected.color = new Color32(255, 255, 225, 100);
+        menuItems[0].GetComponent<Image>().color = new Color32(10, 241, 245, 100);
+        selected = menuItems[0].GetComponent<Image>();
+    }
+    public void CP2Select() 
+    {
+        currCheckpoint = 1;
+        selected.color = new Color32(255, 255, 225, 100);
+        menuItems[1].GetComponent<Image>().color = new Color32(10, 241, 245, 100);
+        selected = menuItems[1].GetComponent<Image>();
+    }
+    public void CP3Select()
+    {
+        currCheckpoint = 2;
+        selected.color = new Color32(255, 255, 225, 100);
+        menuItems[2].GetComponent<Image>().color = new Color32(10, 241, 245, 100);
+        selected = menuItems[2].GetComponent<Image>();
+    }
+    public void CP4Select()
+    {
+        currCheckpoint = 3;
+        selected.color = new Color32(255, 255, 225, 100);
+        menuItems[3].GetComponent<Image>().color = new Color32(10, 241, 245, 100);
+        selected = menuItems[3].GetComponent<Image>();
+    }
+    public void CP5Select()
+    {
+        currCheckpoint = 4;
+        selected.color = new Color32(255, 255, 225, 100);
+        menuItems[4].GetComponent<Image>().color = new Color32(10, 241, 245, 100);
+        selected = menuItems[4].GetComponent<Image>();
+    }
+    public void CP6Select()
+    {
+        currCheckpoint = 5;
+        selected.color = new Color32(255, 255, 225, 100);
+        menuItems[5].GetComponent<Image>().color = new Color32(10, 241, 245, 100);
+        selected = menuItems[5].GetComponent<Image>();
+    }
+    public void onTrackPress() {
+        compass.SetCheckpoint(currCheckpoint);
     }
 }

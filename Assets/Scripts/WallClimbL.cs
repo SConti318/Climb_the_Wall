@@ -10,6 +10,8 @@ public class WallClimbL : MonoBehaviour
     public GameObject grabbyL;
     InputDevice leftHand;
 
+    [SerializeField] private HandManager handManager;
+
     [SerializeField] private MenuLogic menu;
 
     [SerializeField] private GameObject cameraOff;
@@ -27,9 +29,7 @@ public class WallClimbL : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var leftList = new List<UnityEngine.XR.InputDevice>();
-        UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Left, leftList);
-        leftHand = leftList[0];
+        leftHand = handManager.leftHand;
 
         firstLeft = false;
         isCurrent = false;
@@ -39,14 +39,7 @@ public class WallClimbL : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!leftHand.isValid)
-        {
-            var leftList = new List<UnityEngine.XR.InputDevice>();
-            UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Left, leftList);
-            leftHand = leftList[0];
-            Debug.Log("Left set to valid");
-
-        }
+        leftHand = handManager.leftHand;
 
     }
 

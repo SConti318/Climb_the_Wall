@@ -24,7 +24,8 @@ public class Compass : MonoBehaviour
         //Debug.Log(rotation.ToString());
         Debug.Log(transform.eulerAngles.ToString());
     }
-    void SetCheckpoint(int num) {
+    public void SetCheckpoint(int num) {
+        Debug.Log("Setting checkpoint "+ num);
         currCheckpoint = checkPoints[num];
     }
 }

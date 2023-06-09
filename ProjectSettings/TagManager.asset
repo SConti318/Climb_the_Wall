@@ -9,6 +9,16 @@ TagManager:
   - UIButton
   - CPPannel
   - Backpack
+  - CP1
+  - CP2
+  - CP3
+  - CP4
+  - CP5
+  - CPFin
+  - hand
+  - handL
+  - handR
+  - InventoryItem
   layers:
   - Default
   - TransparentFX

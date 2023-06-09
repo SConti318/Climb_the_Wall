@@ -7,6 +7,8 @@ public class ToolGrabL : MonoBehaviour
 {
     InputDevice leftHand;
 
+    [SerializeField] private HandManager handManager;
+
     [SerializeField] private GameObject leftCon;
 
 
@@ -17,28 +19,14 @@ public class ToolGrabL : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var leftList = new List<UnityEngine.XR.InputDevice>();
-        UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Left, leftList);
-        leftHand = leftList[0];
-
-
-
         toolUsedL = false;
+        leftHand = handManager.leftHand;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!leftHand.isValid)
-        {
-            var leftList = new List<UnityEngine.XR.InputDevice>();
-            UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Left, leftList);
-            leftHand = leftList[0];
-            //Debug.Log("Left set to valid");
-
-        }
-
-
+        leftHand = handManager.leftHand;
     }
 
     private void OnTriggerStay(Collider hit)
@@ -55,7 +43,6 @@ public class ToolGrabL : MonoBehaviour
                 }
                 Debug.Log("grab tool left");
                 hit.transform.parent = leftCon.transform;
-                hit.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 //toolUsed = true;
                 leftClimbSphere.SetActive(false);
                 toolUsedL = true;
@@ -71,7 +58,6 @@ public class ToolGrabL : MonoBehaviour
 
 
                 toolUsedL = false;
-                hit.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 leftClimbSphere.SetActive(true);
 
             }
