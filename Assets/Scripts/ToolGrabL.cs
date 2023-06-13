@@ -54,6 +54,7 @@ public class ToolGrabL : MonoBehaviour
                 if (hit.transform.parent == leftCon.transform)
                 {
                     hit.transform.parent = null;
+                    hit.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 }
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuLogic : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class MenuLogic : MonoBehaviour
 
     [SerializeField] private List<GameObject> menuItems;
 
+    [SerializeField] private GameObject confirmMenu;
+
     private Image selected;
     private int currCheckpoint;
     // Start is called before the first frame update
@@ -26,6 +29,7 @@ public class MenuLogic : MonoBehaviour
         MenuVis = false;
         //menu.enabled = false;
         menu.SetActive(false);
+        confirmMenu.SetActive(false);
         selected = menuItems[0].GetComponent<Image>();
         currCheckpoint = 0;
     }
@@ -44,14 +48,14 @@ public class MenuLogic : MonoBehaviour
         menu.SetActive(MenuVis);
     }
 
-    public void CP1Select() 
+    public void CP1Select()
     {
         currCheckpoint = 0;
         selected.color = new Color32(255, 255, 225, 100);
         menuItems[0].GetComponent<Image>().color = new Color32(10, 241, 245, 100);
         selected = menuItems[0].GetComponent<Image>();
     }
-    public void CP2Select() 
+    public void CP2Select()
     {
         currCheckpoint = 1;
         selected.color = new Color32(255, 255, 225, 100);
@@ -88,5 +92,20 @@ public class MenuLogic : MonoBehaviour
     }
     public void onTrackPress() {
         compass.SetCheckpoint(currCheckpoint);
+    }
+    public void resetSureMessage()
+    {
+        MenuVis = false;
+        menu.SetActive(false);
+        confirmMenu.SetActive(true);
+
+    }
+    public void resetNo()
+    {
+        confirmMenu.SetActive(false);
+    }
+    public void resetYes()
+    {
+        SceneManager.LoadScene("Scenes/Build", LoadSceneMode.Single);
     }
 }

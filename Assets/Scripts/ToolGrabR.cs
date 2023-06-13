@@ -31,6 +31,8 @@ public class ToolGrabR : MonoBehaviour
 
     private void OnTriggerStay(Collider hit)
     {
+
+
         if (hit.gameObject.tag == "tool")
         {
             
@@ -40,10 +42,12 @@ public class ToolGrabR : MonoBehaviour
             {
                 if (toolUsedR)
                 {
+                    Debug.Log("AlreadyHolding");
                     return;
                 }
                 //Debug.Log("grab tool");
                 hit.transform.parent = rightCon.transform;
+                hit.transform.localPosition = new Vector3(0, 0, 0);
                 hit.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 //toolUsed = true;
                 rightClimbSphere.SetActive(false);
