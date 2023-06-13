@@ -26,8 +26,9 @@ public class HandManager : MonoBehaviour
         {
             var leftList = new List<UnityEngine.XR.InputDevice>();
             UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Left, leftList);
-            leftHand = leftList[0];
-            Debug.Log("Left set to valid");
+            if (leftList.Count > 0) {
+                leftHand = leftList[0];
+            }
 
         }
 
@@ -35,7 +36,10 @@ public class HandManager : MonoBehaviour
         {
             var rightList = new List<UnityEngine.XR.InputDevice>();
             UnityEngine.XR.InputDevices.GetDevicesWithCharacteristics(UnityEngine.XR.InputDeviceCharacteristics.Right, rightList);
-            rightHand = rightList[0];
+            if (rightList.Count > 0)
+            {
+                rightHand = rightList[0];
+            }
         }
     }
 }

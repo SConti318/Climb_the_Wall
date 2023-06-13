@@ -25,6 +25,8 @@ public class WallClimbL : MonoBehaviour
 
     private bool isCurrent;
 
+    public bool wallCollide;
+    public bool floorCollide;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +35,8 @@ public class WallClimbL : MonoBehaviour
 
         firstLeft = false;
         isCurrent = false;
-
+        wallCollide = false;
+        floorCollide = false;
     }
 
     // Update is called once per frame
@@ -63,15 +66,38 @@ public class WallClimbL : MonoBehaviour
                     rightClimb.GetComponent<WallClimbR>().setCurrent(false);
                 }
 
-                
 
                 if (isCurrent)
                 {
                     Debug.Log("Grip button is pressed in hand hold");
                     //wall.transform.SetParent(grabbyL.transform);
-                    cameraOff.transform.position += -1 * (leftCon.transform.position - originalHand);
+
+
+
+                    Vector3 movement = -1 * (leftCon.transform.position - originalHand);
+                    if (wallCollide)
+                    {
+                        //if ((originalHand.z - newPos.z) > 0)
+                        //{
+                        //Debug.Log("Colliding with wall");
+                        movement.z = 0;
+                        //}
+                    }
+                    if (floorCollide)
+                    {
+                        //if ((originalHand.y - newPos.y) < 0)
+                        //{
+                        movement.y = 0;
+                        //}
+                    }
+
+                    cameraOff.transform.position += movement;
+
+
+
+
                     cameraOff.GetComponent<Rigidbody>().isKinematic = true;
-                    Debug.Log("new " + leftCon.transform.position.ToString());
+                    //Debug.Log("new " + leftCon.transform.position.ToString());
                     //Debug.Log(camera.transform.position.ToString());
                     //originalHand = transform.localPosition;
                     leftToolSphere.SetActive(false);

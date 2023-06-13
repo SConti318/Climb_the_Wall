@@ -21,11 +21,10 @@ public class Compass : MonoBehaviour
         float point = Mathf.Atan2(relative.y, -relative.x) * Mathf.Rad2Deg;
 
         transform.localRotation = Quaternion.Euler(0, 0, -point);
-        //Debug.Log(rotation.ToString());
-        Debug.Log(transform.eulerAngles.ToString());
+        
     }
     public void SetCheckpoint(int num) {
-        Debug.Log("Setting checkpoint "+ num);
+        //Debug.Log("Setting checkpoint "+ num);
         currCheckpoint = checkPoints[num];
     }
 }

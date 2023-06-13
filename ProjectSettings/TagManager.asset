@@ -19,6 +19,10 @@ TagManager:
   - handL
   - handR
   - InventoryItem
+  - Floor
+  - Wall
+  - target
+  - Breakable
   layers:
   - Default
   - TransparentFX
