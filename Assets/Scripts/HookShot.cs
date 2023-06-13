@@ -60,7 +60,7 @@ public class HookShot : MonoBehaviour
             if (handManager.leftHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out trigValue) && trigValue)
             {
                 RaycastHit hit;
-                Ray ray = new Ray(this.transform.position, this.transform.forward);
+                Ray ray = new Ray(this.transform.position + this.transform.forward, this.transform.forward);
                 Debug.DrawRay(transform.position, transform.forward, Color.green);
                 if (Physics.Raycast(ray, out hit, 10f))
                 {
@@ -88,7 +88,7 @@ public class HookShot : MonoBehaviour
             if (handManager.rightHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out trigValue) && trigValue)
             {
                 RaycastHit hit;
-                Ray ray = new Ray(this.transform.position, this.transform.forward);
+                Ray ray = new Ray(this.transform.position + this.transform.forward, this.transform.forward);
                 //Debug.DrawRay(transform.position, transform.forward, Color.green);
                 Debug.Log("trigger");
                 if (Physics.Raycast(ray, out hit, 10f))

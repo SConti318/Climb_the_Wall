@@ -5,7 +5,7 @@ using UnityEngine;
 public class GemHole : MonoBehaviour
 {
     [SerializeField] private string gemTag;
-    [SerializeField] private GameObject numberBlock;
+    [SerializeField] private List<GameObject> numberBlocks;
     private bool numBlockMove;
     private float numBlockPos;
 
@@ -19,9 +19,10 @@ public class GemHole : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (numBlockMove && numberBlock.transform.localPosition.z > -0.5f) {
-            numBlockPos = 0.001f;
-            numberBlock.transform.localPosition -= new Vector3(0, 0, numBlockPos);
+        if (numBlockMove && numberBlocks[0].transform.localPosition.z > -0.5f) {
+            foreach(GameObject numberBlock in numberBlocks) {
+                numberBlock.transform.localPosition -= new Vector3(0, 0, 0.01f);
+            }
         }
     }
     void OnTriggerEnter(Collider hit) {

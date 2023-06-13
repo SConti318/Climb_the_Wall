@@ -15,8 +15,10 @@ public class MenuLogic : MonoBehaviour
     [SerializeField] private HandManager handManager;
 
     [SerializeField] private List<GameObject> menuItems;
+    [SerializeField] private List<GameObject> TrackedIcons;
 
     [SerializeField] private GameObject confirmMenu;
+    [SerializeField] private GameObject levelMenu;
 
     private Image selected;
     private int currCheckpoint;
@@ -30,6 +32,7 @@ public class MenuLogic : MonoBehaviour
         //menu.enabled = false;
         menu.SetActive(false);
         confirmMenu.SetActive(false);
+        levelMenu.SetActive(false);
         selected = menuItems[0].GetComponent<Image>();
         currCheckpoint = 0;
     }
@@ -92,6 +95,10 @@ public class MenuLogic : MonoBehaviour
     }
     public void onTrackPress() {
         compass.SetCheckpoint(currCheckpoint);
+        foreach (GameObject icon in TrackedIcons) {
+            icon.SetActive(false);
+        }
+        TrackedIcons[currCheckpoint].SetActive(true);
     }
     public void resetSureMessage()
     {
@@ -100,12 +107,27 @@ public class MenuLogic : MonoBehaviour
         confirmMenu.SetActive(true);
 
     }
+    public void levelChangeMenu()
+    {
+        MenuVis = false;
+        menu.SetActive(false);
+        levelMenu.SetActive(true);
+
+    }
+    public void cancelLevel()
+    {
+        levelMenu.SetActive(false);
+    }
     public void resetNo()
     {
         confirmMenu.SetActive(false);
     }
-    public void resetYes()
+    public void resetYesBuild()
     {
         SceneManager.LoadScene("Scenes/Build", LoadSceneMode.Single);
+    }
+    public void resetYesDemo()
+    {
+        SceneManager.LoadScene("Scenes/Demo", LoadSceneMode.Single);
     }
 }
