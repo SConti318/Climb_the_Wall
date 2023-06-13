@@ -11,9 +11,12 @@ GameObject:
   - component: {fileID: 9180010570845642564}
   - component: {fileID: 5245050262872838369}
   - component: {fileID: 8011585039136072747}
+  - component: {fileID: 593701686675015163}
+  - component: {fileID: 2762974844721046265}
+  - component: {fileID: -1323069128800055201}
   m_Layer: 0
   m_Name: Diamond
-  m_TagString: Untagged
+  m_TagString: CP5
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,3 +86,48 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &593701686675015163
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8371666507660625406}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.9999998, z: 0.7499999}
+  m_Center: {x: 0.000000029802322, y: -0.03209891, z: -0.0998165}
+--- !u!54 &2762974844721046265
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8371666507660625406}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-1323069128800055201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8371666507660625406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb49fd577dd07a4d8a3ed66baad7fd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightContoller: {fileID: 0}
+  leftContoller: {fileID: 0}
+  handManager: {fileID: 0}
+  menu: {fileID: 0}

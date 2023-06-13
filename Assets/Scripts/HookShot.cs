@@ -47,7 +47,7 @@ public class HookShot : MonoBehaviour
         {
             return;
         }
-        //Debug.DrawRay(transform.position, transform.forward, Color.green);
+        Debug.DrawRay(transform.position, transform.forward, Color.green);
         if (parent == leftTool.transform)
         {
             line.enabled = true;

@@ -34,4 +34,7 @@ public class GemHole : MonoBehaviour
             numBlockMove = true;
         }
     }
+    public bool isActivated() {
+        return numBlockMove;
+    }
 }
