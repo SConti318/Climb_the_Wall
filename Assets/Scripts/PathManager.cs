@@ -23,7 +23,7 @@ public class PathManager : MonoBehaviour
                 }
             }
         }
-        if (this.transform.localPosition.y < -5.0f) {
+        if (this.transform.localPosition.y < -5.0f && lift) {
             this.transform.localPosition += new Vector3(0.0f,0.1f,0.0f);
         }
     }

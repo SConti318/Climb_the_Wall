@@ -20,6 +20,7 @@ public class DoorScript : MonoBehaviour
         wheel3 = false;
         wheel4 = false;
         wheel5 = false;
+        doorLift = 0;
     }
 
     // Update is called once per frame
@@ -65,9 +66,8 @@ public class DoorScript : MonoBehaviour
             wheel5 = false;
         }
         if (wheel1 && wheel2 && wheel3 && wheel4 && wheel5) {
-            if (doorLift < 2.5f) {
-                this.transform.localPosition += new Vector3( 0.0f, doorLift, 0.0f);
-                doorLift += 0.00005f;
+            if (this.transform.localPosition.y < 2.5f) {
+                this.transform.localPosition += new Vector3( 0.0f, 0.01f, 0.0f);
             }
         }
     }

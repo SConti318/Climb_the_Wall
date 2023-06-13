@@ -62,7 +62,7 @@ public class HookShot : MonoBehaviour
                 RaycastHit hit;
                 Ray ray = new Ray(this.transform.position + this.transform.forward, this.transform.forward);
                 Debug.DrawRay(transform.position, transform.forward, Color.green);
-                if (Physics.Raycast(ray, out hit, 10f))
+                if (Physics.Raycast(ray, out hit, 100f))
                 {
                     if (hit.transform.tag == "target")
                     {
@@ -91,7 +91,7 @@ public class HookShot : MonoBehaviour
                 Ray ray = new Ray(this.transform.position + this.transform.forward, this.transform.forward);
                 //Debug.DrawRay(transform.position, transform.forward, Color.green);
                 Debug.Log("trigger");
-                if (Physics.Raycast(ray, out hit, 10f))
+                if (Physics.Raycast(ray, out hit, 100f))
                 {
                     Debug.Log(hit.transform.name);
                     Debug.Log(hit.transform.tag);

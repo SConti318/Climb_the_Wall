@@ -43,7 +43,21 @@ public class ToolGrabL : MonoBehaviour
                 }
                 Debug.Log("grab tool left");
                 hit.transform.parent = leftCon.transform;
-                //toolUsed = true;
+                if (hit.gameObject.name == "miniSledge")
+                {
+                    hit.transform.localPosition = new Vector3(0.0269000009f, -0.00529999984f, 0.0676999986f);
+                    hit.transform.localRotation = Quaternion.Euler(282.342224f, 0.0f, 90.0f);
+                }
+                if (hit.gameObject.name == "Compass")
+                {
+                    hit.transform.localPosition = new Vector3(0.0392000005f, -0.0165986829f, 0.053199999f);
+                    hit.transform.localRotation = new Quaternion(0.489304751f, -0.489304543f, 0.510471344f, -0.510471404f);
+                }
+                if (hit.gameObject.name == "hookshot")
+                {
+                    hit.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+                    hit.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                }
                 leftClimbSphere.SetActive(false);
                 toolUsedL = true;
                 //iggerLeft = true;

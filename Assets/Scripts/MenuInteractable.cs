@@ -32,6 +32,7 @@ public class MenuInteractable : MonoBehaviour
     {
         bool triggerValue;
         if (hit.gameObject.tag == "handL") {
+            Debug.Log("Hover over close");
             if (leftHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out triggerValue) && triggerValue)
             {
                 this.GetComponent<Button>().onClick.Invoke();

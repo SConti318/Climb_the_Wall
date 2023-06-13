@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7881965302406562091}
   - component: {fileID: 1174002337853770773}
   - component: {fileID: 445911058267194570}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rope
   m_TagString: handHold
   m_Icon: {fileID: 0}

@@ -19,6 +19,7 @@ public class MenuLogic : MonoBehaviour
 
     [SerializeField] private GameObject confirmMenu;
     [SerializeField] private GameObject levelMenu;
+    [SerializeField] private GameObject TutorialMenu;
 
     private Image selected;
     private int currCheckpoint;
@@ -33,6 +34,7 @@ public class MenuLogic : MonoBehaviour
         menu.SetActive(false);
         confirmMenu.SetActive(false);
         levelMenu.SetActive(false);
+        TutorialMenu.SetActive(true);
         selected = menuItems[0].GetComponent<Image>();
         currCheckpoint = 0;
     }
@@ -129,5 +131,13 @@ public class MenuLogic : MonoBehaviour
     public void resetYesDemo()
     {
         SceneManager.LoadScene("Scenes/Demo", LoadSceneMode.Single);
+    }
+    public void closeTutorial()
+    {
+        TutorialMenu.SetActive(false);
+    }
+    public void openTutorial()
+    {
+        TutorialMenu.SetActive(true);
     }
 }

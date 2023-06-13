@@ -6,6 +6,8 @@ public class GemHole : MonoBehaviour
 {
     [SerializeField] private string gemTag;
     [SerializeField] private List<GameObject> numberBlocks;
+    [SerializeField] private GameObject dummy;
+    [SerializeField] private GameObject gem;
     private bool numBlockMove;
     private float numBlockPos;
 
@@ -28,10 +30,8 @@ public class GemHole : MonoBehaviour
     void OnTriggerEnter(Collider hit) {
         Debug.Log("Hit: "+ hit.gameObject.tag + " My Tag: "+gemTag);
         if (hit.gameObject.tag == gemTag) {
-            hit.gameObject.transform.SetParent(this.transform, true);
-            hit.gameObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
-            //hit.gameObject.transform.localRotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
-            hit.gameObject.transform.GetComponent<GemInteractabel>().PutInSlot();
+            hit.gameObject.SetActive(false);
+            Instantiate(gem, dummy.transform.position, Quaternion.Euler(-90, 0, 0));
             numBlockMove = true;
         }
     }
