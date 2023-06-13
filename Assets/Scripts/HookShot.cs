@@ -52,7 +52,7 @@ public class HookShot : MonoBehaviour
         {
             line.enabled = true;
             line.SetPosition(0, this.transform.position);
-            line.SetPosition(1, this.transform.forward * 100);
+            line.SetPosition(1, this.transform.position + (this.transform.forward * 10));
 
 
 
@@ -61,8 +61,8 @@ public class HookShot : MonoBehaviour
             {
                 RaycastHit hit;
                 Ray ray = new Ray(this.transform.position, this.transform.forward);
-                //Debug.DrawRay(transform.position, transform.forward, Color.green);
-                if (Physics.Raycast(ray, out hit, 100f))
+                Debug.DrawRay(transform.position, transform.forward, Color.green);
+                if (Physics.Raycast(ray, out hit, 10f))
                 {
                     if (hit.transform.tag == "target")
                     {
@@ -81,16 +81,20 @@ public class HookShot : MonoBehaviour
         {
             line.enabled = true;
             line.SetPosition(0, this.transform.position);
-            line.SetPosition(1, this.transform.forward * 100);
+            line.SetPosition(1, this.transform.position + (this.transform.forward * 10));
             bool trigValue;
+
+            Debug.Log("Grabbed");
             if (handManager.rightHand.TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out trigValue) && trigValue)
             {
                 RaycastHit hit;
                 Ray ray = new Ray(this.transform.position, this.transform.forward);
                 //Debug.DrawRay(transform.position, transform.forward, Color.green);
-
-                if (Physics.Raycast(ray, out hit, 100f))
+                Debug.Log("trigger");
+                if (Physics.Raycast(ray, out hit, 10f))
                 {
+                    Debug.Log(hit.transform.name);
+                    Debug.Log(hit.transform.tag);
                     if (hit.transform.tag == "target")
                     {
 
